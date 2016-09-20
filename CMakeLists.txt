@@ -6,7 +6,7 @@ project(qt_ros)
 find_package(Qt5Widgets REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
                         roscpp
-                        std_msgs )
+                        geometry_msgs )
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -22,7 +22,7 @@ include_directories(${qt_ros_INCLUDE_DIRECTORIES}
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
-    CATKIN_DEPENDS roscpp std_msgs
+    CATKIN_DEPENDS roscpp geometry_msgs
     DEPENDS Qt5Widgets )
 
 file(GLOB qt_ros_SRCS src/*.cpp)
