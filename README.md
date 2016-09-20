@@ -3,6 +3,7 @@ A standalone bare-bones repository for creating ros applications with qt that
 don't rely on rqt, using cmake.
 
 ros: http://www.ros.org/
+
 qt:  https://www.qt.io/
 
 the general structure is:
