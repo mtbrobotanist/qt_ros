@@ -9,11 +9,11 @@ qt:  https://www.qt.io/
 the general structure is:
 
   qt_ros
-    + src           (*.cpp goes here)
-        + main.cpp  (the main entry point into a QApplication)
-    + include       (*.h goes here)
-    + resources     (*.ui goes here)
-        + qrc       (*.qrc goes here)
+    + src/           (*.cpp goes here)
+        + main.cpp   (the main entry point into a QApplication)
+    + include/       (*.h goes here)
+    + resources/     (*.ui goes here)
+        + qrc/       (*.qrc goes here)
     + CMakeLists.txt
 
 
