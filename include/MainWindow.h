@@ -20,6 +20,7 @@ public slots:
         
 private:
     Ui::MainWindow widget;
+    ros::NodeHandlePtr nh;
     ros::Publisher pub_cmd_vel;
     double linear,
            angular,

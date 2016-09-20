@@ -7,12 +7,12 @@ MainWindow::MainWindow():
     linear_scale(2),
     angular_scale(2),
     linear(0),
-    angular(0)
+    angular(0),
+    nh(new ros::NodeHandle)
 {
     widget.setupUi(this);
 
-    ros::NodeHandle nh;
-    pub_cmd_vel = nh.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1);
+    pub_cmd_vel = nh->advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1);
 
     connect(widget.btn_up, &QPushButton::clicked,
             this, &MainWindow::OnUpClicked);
