@@ -3,7 +3,7 @@
 #define _MAINWINDOW_H
 
 #include "ui_MainWindow.h"
-#include <QTimer>
+#include <ros/ros.h>
 
 class MainWindow : public QMainWindow
 {
@@ -11,9 +11,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
     virtual ~MainWindow();
+    
+public slots:
+    void OnLeftClicked();
+    void OnRightClicked();
+    void OnUpClicked();
+    void OnDownClicked();
+        
 private:
     Ui::MainWindow widget;
-    QTimer* timer;
+    ros::Publisher pub_cmd_vel;
+    double linear,
+           angular,
+           linear_scale,
+           angular_scale;
+    
+    void TranslateAndPublish();
 };
 
 #endif /* _MAINWINDOW_H */

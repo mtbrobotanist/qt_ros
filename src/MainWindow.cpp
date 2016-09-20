@@ -1,26 +1,63 @@
 
 #include "MainWindow.h"
 #include <ros/ros.h>
-#include <std_msgs/Int32.h>
+#include <geometry_msgs/Twist.h>
 
 MainWindow::MainWindow():
-timer(new QTimer(this))
+    linear_scale(2),
+    angular_scale(2),
+    linear(0),
+    angular(0)
 {
     widget.setupUi(this);
 
     ros::NodeHandle nh;
-    ros::Publisher pub = nh.advertise<std_msgs::Int32>("pub_5", 5);
+    pub_cmd_vel = nh.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1);
 
-    connect(timer, &QTimer::timeout, this,
-            [=](){
-                std_msgs::Int32 msg;
-                msg.data = 5;
-                pub.publish(msg);
-            });
-            
-    timer->start(0);
+    connect(widget.btn_up, &QPushButton::clicked,
+            this, &MainWindow::OnUpClicked);
+    connect(widget.btn_left, &QPushButton::clicked,
+            this, &MainWindow::OnLeftClicked);
+    connect(widget.btn_right, &QPushButton::clicked,
+            this, &MainWindow::OnRightClicked);
+    connect(widget.btn_down, &QPushButton::clicked,
+            this, &MainWindow::OnDownClicked);   
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::TranslateAndPublish()
+{
+    geometry_msgs::Twist twist;
+    twist.angular.z = angular_scale * angular;
+    twist.linear.x = linear_scale * linear;
+    pub_cmd_vel.publish(twist);
+    
+    linear = angular = 0;
+}
+
+void MainWindow::OnLeftClicked()
+{
+    angular = 1;
+    this->TranslateAndPublish();
+}
+
+void MainWindow::OnRightClicked()
+{
+    angular = -1;
+    this->TranslateAndPublish();
+}
+
+void MainWindow::OnUpClicked()
+{
+    linear = 1;
+    this->TranslateAndPublish();
+}
+
+void MainWindow::OnDownClicked()
+{
+    linear = -1;
+    this->TranslateAndPublish();
 }

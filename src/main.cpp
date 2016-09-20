@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    ros::init(argc, argv, "qt_ros_node");
+    ros::init(argc, argv, "turtle_teleop_key_gui");
 
     MainWindow m;
     m.show();
