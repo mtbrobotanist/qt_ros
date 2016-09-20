@@ -1,9 +1,3 @@
-/*
- * File:   main.cpp
- * Author: n8
- *
- * Created on September 15, 2016, 11:25 AM
- */
 
 #include <QApplication>
 #include <ros/ros.h>
@@ -16,9 +10,9 @@ int main(int argc, char *argv[])
     // Q_INIT_RESOURCE(resfile);
 
     QApplication app(argc, argv);
-    
+
     ros::init(argc, argv, "qt_ros_node");
-       
+
     MainWindow m;
     m.show();
     // create and show your widgets here

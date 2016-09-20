@@ -1,11 +1,4 @@
 
-/* 
- * File:   MainWindow.h
- * Author: serl
- *
- * Created on September 15, 2016, 12:01 PM
- */
-
 #ifndef _MAINWINDOW_H
 #define _MAINWINDOW_H
 
