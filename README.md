@@ -16,14 +16,14 @@ The general structure is:
 
 
 This repository is designed to be cloned into the src directory of a catkin
-workspace. That is, a workspace created by running the command `catkin_init_workspace`
-from inside src (but not the src dir of this repository!).
+workspace. That is, a workspace created by running the command `catkin_init_workspace`.
 see here: http://wiki.ros.org/catkin/Tutorials/create_a_workspace
 
-The CmakeLists.txt file is already configured to automatically compile all files
+The CmakeLists.txt file is configured to automatically compile all files
 into a shared library (lib_qt_ros.so) which is linked to the executable created
 from main.cpp, so long as you put the appropriate files in their respective directory.
-Don't move main.cpp unless you want to edit CMakelists.txt yourself.
+Don't move main.cpp unless you want to edit CMakelists.txt yourself
+(you may want to edit if you plan on renaming the library, which you should).
 
 For those new to qt don't trip if when examining your headers you see `#include "ui_<my_file>.h"`
 and it doesn't exist yet. Just run `catkin_make` from the root of your catkin workspace and
