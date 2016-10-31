@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     ros::init(argc, argv, "turtle_teleop_key_gui");
-
+    ros::AsyncSpinner spinner(1);
+    spinner.start();
+    
     MainWindow m;
     m.show();
     // create and show your widgets here

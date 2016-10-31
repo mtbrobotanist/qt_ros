@@ -7,12 +7,17 @@ MainWindow::MainWindow():
     linear_scale(2),
     angular_scale(2),
     linear(0),
-    angular(0),
-    nh(new ros::NodeHandle)
+    angular(0)
 {
     widget.setupUi(this);
 
-    pub_cmd_vel = nh->advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1);
+    pub_cmd_vel = nh.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 1);
+
+    
+    image_transport::ImageTransport it{nh};
+    
+    sub_img = it.subscribe("/usb_cam/image_raw", 100, &MainWindow::ImageCallback, this);
+
 
     connect(widget.btn_up, &QPushButton::clicked,
             this, &MainWindow::OnUpClicked);
@@ -26,6 +31,23 @@ MainWindow::MainWindow():
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::ImageCallback(const sensor_msgs::ImageConstPtr& in)
+{
+    ROS_WARN_STREAM("in image callback");
+    
+    QImage::Format f = QImage::Format_RGB888;
+    QImage img(in->data.data(), in->width, in->height, in->step, f);
+//    img = img.rgbSwapped();
+    
+    QPixmap pic = QPixmap::fromImage(img);
+    
+    int w = widget.image_frame->width();
+    int h = widget.image_frame->height();
+    
+    pic = pic.scaled(w, h, Qt::KeepAspectRatio);
+    widget.image_frame->setPixmap(pic);
 }
 
 void MainWindow::TranslateAndPublish()

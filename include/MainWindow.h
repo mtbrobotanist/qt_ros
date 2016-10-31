@@ -4,6 +4,8 @@
 
 #include "ui_MainWindow.h"
 #include <ros/ros.h>
+#include <sensor_msgs/Image.h>
+#include <image_transport/image_transport.h>
 
 class MainWindow : public QMainWindow
 {
@@ -11,6 +13,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
     virtual ~MainWindow();
+    
+    void ImageCallback(const sensor_msgs::ImageConstPtr& msg);
     
 public slots:
     void OnLeftClicked();
@@ -20,8 +24,10 @@ public slots:
         
 private:
     Ui::MainWindow widget;
-    ros::NodeHandlePtr nh;
+    ros::NodeHandle nh;
     ros::Publisher pub_cmd_vel;
+    image_transport::Subscriber sub_img;
+    
     double linear,
            angular,
            linear_scale,

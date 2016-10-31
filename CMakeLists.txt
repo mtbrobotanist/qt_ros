@@ -6,7 +6,9 @@ project(qt_ros)
 find_package(Qt5Widgets REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
                         roscpp
-                        geometry_msgs )
+                        geometry_msgs 
+                        image_transport
+                        sensor_msgs)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
